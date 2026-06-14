@@ -13,7 +13,7 @@ namespace VetClinicAPI_V2.Models
         public string Code { get; set; } = string.Empty;
 
         [Required]
-        [MaxLength(100)]
+        [MaxLength(50)]
         public string Name { get; set; } = string.Empty;
 
         [Required]
