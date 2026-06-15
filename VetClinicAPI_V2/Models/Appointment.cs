@@ -30,6 +30,6 @@ namespace VetClinicAPI_V2.Models
 
         public StatusEnum Status { get; set; }
 
-        public bool IsDeleted { get; set; }
+        public bool IsDeleted { get; set; } = false;
     }
 }

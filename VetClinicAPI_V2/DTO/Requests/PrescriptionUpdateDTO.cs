@@ -2,8 +2,10 @@
 
 namespace VetClinicAPI_V2.DTO.Requests
 {
-    public class PrescriptionRequestDTO
+    public class PrescriptionUpdateDTO
     {
+        [Required(ErrorMessage = "Prescription id is required.")]
+        public int Id { get; set; }
 
         [Required(ErrorMessage = "Medication selection is required.")]
         public int MedicationId { get; set; }

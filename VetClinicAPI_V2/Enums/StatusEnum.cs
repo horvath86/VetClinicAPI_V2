@@ -2,8 +2,8 @@
 {
     public enum StatusEnum
     {
-        scheduled,
-        started,
-        canceled
+        Scheduled,
+        Started,
+        Canceled
     }
 }
