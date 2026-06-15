@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using VetClinicAPI_V2.Data;
+using VetClinicAPI_V2.Interfaces;
+using VetClinicAPI_V2.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 var app = builder.Build();
 
