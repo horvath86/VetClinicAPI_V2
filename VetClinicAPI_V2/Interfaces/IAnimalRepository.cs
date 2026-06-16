@@ -1,14 +1,15 @@
 ﻿using VetClinicAPI_V2.DTO.Requests;
 using VetClinicAPI_V2.DTO.Responses;
+using VetClinicAPI_V2.Enums;
 
 namespace VetClinicAPI_V2.Interfaces
 {
-    public interface IAnimalInterface
+    public interface IAnimalRepository
     {
-        public Task<ICollection<AnimalResponseDTO>> GetAllAnimals(string? search = null);
-        public Task<AnimalResponseDTO?> GetAnimalById(int id);
-        public Task<AnimalResponseDTO> CreateAnimal(AnimalCreateDTO createAnimal);
-        public Task<AnimalResponseDTO?> UpdateAnimal(AnimalUpdateDTO updateAnimal);
-        public Task<bool> DeleteAnimal(int id);
+        Task<ICollection<AnimalResponseDTO>> GetAllAnimalsAsync(string? search = null, SpeciesEnum? species = null);
+        Task<AnimalResponseDTO?> GetAnimalByIdAsync(int id);
+        Task<AnimalResponseDTO> CreateAnimalAsync(AnimalCreateDTO createAnimal);
+        Task<AnimalResponseDTO?> UpdateAnimalAsync(AnimalUpdateDTO updateAnimal);
+        Task<bool> DeleteAnimalAsync(int id);
     }
 }
