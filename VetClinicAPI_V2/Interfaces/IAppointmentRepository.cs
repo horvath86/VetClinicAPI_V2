@@ -5,10 +5,10 @@ namespace VetClinicAPI_V2.Interfaces
 {
     public interface IAppointmentRepository
     {
-        Task<ICollection<AppointmentResponseDTO>> GetallAppointmentsAsync(string? search);
-        Task<AppointmentResponseDTO> GetAppointmentByIdAsync(int id);
+        Task<ICollection<AppointmentResponseDTO>> GetAllAppointmentsAsync(string? search, DateOnly? dateOnly);
+        Task<AppointmentResponseDTO?> GetAppointmentByIdAsync(int id);
         Task<AppointmentResponseDTO> CreateAppointmentAsync(AppointmentCreateDTO createAppointment);
-        Task<AppointmentResponseDTO> UpdateAppointmentAsync(AppointmentUpdateDTO updateAppointment);
+        Task<AppointmentResponseDTO?> UpdateAppointmentAsync(AppointmentUpdateDTO updateAppointment);
         Task<bool> DeleteAppointmentAsync(int id);
     }
 }
