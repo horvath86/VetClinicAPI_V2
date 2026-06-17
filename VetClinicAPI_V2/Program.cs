@@ -17,6 +17,8 @@ builder.Services.AddScoped<IOwnerRepository, OwnerRepository>();
 builder.Services.AddScoped<IAnimalRepository, AnimalRepository>();
 builder.Services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 builder.Services.AddScoped<IMedicationRepository, MedicationRepository>();
+builder.Services.AddScoped<IProcedureRepository, ProcedureRepository>();
+builder.Services.AddScoped<IDiagnosisRepository, DiagnosisRepository>();
 
 var app = builder.Build();
 
