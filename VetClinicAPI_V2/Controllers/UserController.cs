@@ -1,0 +1,68 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using VetClinicAPI_V2.DTO.Requests;
+using VetClinicAPI_V2.DTO.Responses;
+using VetClinicAPI_V2.Enums;
+using VetClinicAPI_V2.Interfaces;
+
+namespace VetClinicAPI_V2.Controllers
+{
+    [ApiController]
+    [Route("api/[controller]")]
+    public class UserController : ControllerBase
+    {
+        private readonly IUserRepository _userRepository;
+
+        public UserController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<ICollection<UserResponseDTO>>> GetUsers([FromQuery] RoleEnum? role)
+        {
+            var result = await _userRepository.GetAllUsersAsync(role);
+
+            return Ok(result);
+        }
+
+        [HttpGet("{id}", Name = "GetUserByIdRoute")]
+        public async Task<ActionResult<UserResponseDTO?>> GetUserById(int id)
+        {
+            var result = await _userRepository.GetUserByIdAsync(id);
+
+            if (result == null)
+            {
+                return NotFound(null);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<UserResponseDTO?>> UpdateUser([FromBody] UserUpdateDTO dto)
+        {
+            var result = await _userRepository.UpdateUserAsync(dto);
+
+            if (result == null)
+            {
+                return NotFound(null);
+            }
+
+            return Ok(result);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<bool>> DeleteUser(int id)
+        {
+            var deleted = await _userRepository.DeleteUserAsync(id);
+
+            if (!deleted)
+            {
+                return NotFound(false);
+            }
+
+            return Ok(true);
+        }
+        
+    }
+}
