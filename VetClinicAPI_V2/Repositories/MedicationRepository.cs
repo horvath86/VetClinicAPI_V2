@@ -48,7 +48,7 @@ namespace VetClinicAPI_V2.Repositories
             return true;
         }
 
-        public async Task<ICollection<Medication>> GetAllMedicationAsync(string? search)
+        public async Task<ICollection<Medication>> GetAllMedicationsAsync(string? search)
         {
             var query = _context.Medications.AsNoTracking();
 
