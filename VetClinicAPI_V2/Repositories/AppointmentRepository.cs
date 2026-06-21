@@ -126,7 +126,6 @@ namespace VetClinicAPI_V2.Repositories
         public async Task<AppointmentResponseDTO?> UpdateAppointmentAsync(AppointmentUpdateDTO updateAppointment)
         {
             var existingAppointment = await _context.Appointments
-                .IgnoreQueryFilters()
                 .Include(a => a.User)
                 .FirstOrDefaultAsync(a => a.Id == updateAppointment.Id);
 

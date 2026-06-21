@@ -176,7 +176,6 @@ namespace VetClinicAPI_V2.Repositories
         public async Task<MedicalRecordResponseDTO?> UpdateMedicalRecordAsync(MedicalRecordUpdateDTO updateMedicalRecord)
         {
             var existingMedicalRecord = await _context.MedicalRecords
-                .IgnoreQueryFilters()
                 .Include(m => m.Prescriptions)
                 .Include(m => m.ProcedureRecords)
                 .FirstOrDefaultAsync(m => m.Id == updateMedicalRecord.Id);

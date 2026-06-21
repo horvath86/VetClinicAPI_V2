@@ -126,7 +126,6 @@ namespace VetClinicAPI_V2.Repositories
         public async Task<OwnerResponseDTO?> UpdateOwnerAsync(OwnerUpdateDTO ownerUpdate)
         {
             var existingOwner = await _context.Owners
-                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(o => o.Id == ownerUpdate.Id);
 
             if (existingOwner == null)

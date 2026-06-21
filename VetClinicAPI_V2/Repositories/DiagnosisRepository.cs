@@ -76,7 +76,6 @@ namespace VetClinicAPI_V2.Repositories
         public async Task<Diagnosis?> UpdateDiagnosisAsync(DiagnosisUpdateDTO updateDiagnosis)
         {
             var existingDiagnosis = await _context.Diagnoses
-                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(d => d.Id == updateDiagnosis.Id);
 
             if (existingDiagnosis == null)

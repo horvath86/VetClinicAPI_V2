@@ -123,7 +123,6 @@ namespace VetClinicAPI_V2.Repositories
         public async Task<AnimalResponseDTO?> UpdateAnimalAsync(AnimalUpdateDTO updateAnimal)
         {
             var existingAnimal = await _context.Animals
-                .IgnoreQueryFilters()
                 .Include(a => a.Owner)
                 .FirstOrDefaultAsync(a => a.Id == updateAnimal.Id);
 

@@ -77,7 +77,6 @@ namespace VetClinicAPI_V2.Repositories
         public async Task<Procedure?> UpdateProcedureAsync(ProcedureUpdateDTO updateProcedure)
         {
             var existingProcedure = await _context.Procedures
-                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(p => p.Id == updateProcedure.Id);
 
             if (existingProcedure == null)

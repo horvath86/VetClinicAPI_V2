@@ -76,7 +76,6 @@ namespace VetClinicAPI_V2.Repositories
         public async Task<Medication?> UpdateMedicationAsync(MedicationUpdateDTO updateMedication)
         {
             var existingMedication = await _context.Medications
-                .IgnoreQueryFilters()
                 .FirstOrDefaultAsync(m => m.Id == updateMedication.Id);
 
             if (existingMedication == null)
