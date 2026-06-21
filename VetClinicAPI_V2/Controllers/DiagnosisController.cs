@@ -16,7 +16,7 @@ namespace VetClinicAPI_V2.Controllers
             _diagnosisRepository = diagnosisRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetDiagnoses")]
         public async Task<ActionResult<ICollection<Diagnosis>>> GetDiagnoses([FromQuery] string? search)
         {
             var result = await _diagnosisRepository.GetAllDiagnosesAsync(search);
@@ -24,7 +24,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetDiagnosisById")]
         public async Task<ActionResult<Diagnosis>> GetDiagnosisById(int id)
         {
             var result = await _diagnosisRepository.GetDiagnosisByIdAsync(id);
@@ -37,7 +37,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateDignosis")]
         public async Task<ActionResult<Diagnosis>> CreateDiagnosis([FromBody] DiagnosisCreateDTO dto)
         {
             var result = await _diagnosisRepository.CreateDiagnosisAsync(dto);
@@ -45,7 +45,7 @@ namespace VetClinicAPI_V2.Controllers
             return CreatedAtAction(nameof(GetDiagnosisById), new { id = result.Id }, result);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateDiagnosis")]
         public async Task<ActionResult<Diagnosis>> UpdateDiagnosis([FromBody] DiagnosisUpdateDTO dto)
         {
             var result = await _diagnosisRepository.UpdateDiagnosisAsync(dto);
@@ -58,7 +58,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteDiagnosis")]
         public async Task<ActionResult<bool>> DeleteDiagnosis(int id)
         {
             var deleted = await _diagnosisRepository.DeleteDiagnosisAsync(id);

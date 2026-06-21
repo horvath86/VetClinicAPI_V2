@@ -17,7 +17,7 @@ namespace VetClinicAPI_V2.Controllers
             _medicalRecordRepository = medicalRecordRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetMedicalRecords")]
         public async Task<ActionResult<ICollection<MedicalRecordResponseDTO>>> GetMedicalRecords([FromQuery] DateOnly? dateOnly, [FromQuery] int? userId, [FromQuery] int? animalId)
         {
             var result = await _medicalRecordRepository.GetAllMedicalRecordsAsync(dateOnly, userId, animalId);
@@ -25,7 +25,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetMedicalRecordById")]
         public async Task<ActionResult<MedicalRecordResponseDTO?>> GetMedicalRecordById(int id)
         {
             var result = await _medicalRecordRepository.GetMedicalRecordByIdAsync(id);
@@ -38,7 +38,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateMedicalRecord")]
         public async Task<ActionResult<MedicalRecordResponseDTO>> CreateMedicalRecord([FromBody] MedicalRecordCreateDTO dto)
         {
             var result = await _medicalRecordRepository.CreateMedicalRecordAsync(dto);
@@ -46,7 +46,7 @@ namespace VetClinicAPI_V2.Controllers
             return CreatedAtAction(nameof(GetMedicalRecordById), new { id = result.Id }, result);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateMedicalRecord")]
         public async Task<ActionResult<MedicalRecordResponseDTO?>> UpdateMedicalRecord([FromBody] MedicalRecordUpdateDTO dto)
         {
             var result = await _medicalRecordRepository.UpdateMedicalRecordAsync(dto);
@@ -59,7 +59,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteMedicalRecord")]
         public async Task<ActionResult<bool>> DeleteMedicalRecord(int id) 
         {
             var deleted = await _medicalRecordRepository.DeleteMedicalRecordAsync(id);

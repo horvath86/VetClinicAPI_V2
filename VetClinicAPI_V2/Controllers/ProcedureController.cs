@@ -16,7 +16,7 @@ namespace VetClinicAPI_V2.Controllers
             _procedureRepository = procedureRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetProcedures")]
         public async Task<ActionResult<ICollection<Procedure>>> GetProcedures([FromQuery] string? search)
         {
             var result = await _procedureRepository.GetAllProceduresAsync(search);
@@ -24,7 +24,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetProcedureById")]
         public async Task<ActionResult<Procedure>> GetProcedureById(int id)
         {
             var result = await _procedureRepository.GetProcedureByIdAsync(id);
@@ -37,7 +37,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateProcedure")]
         public async Task<ActionResult<Procedure>> CreateProcedure([FromBody] ProcedureCreateDTO dto)
         {
             var result = await _procedureRepository.CreateProcedureAsync(dto);
@@ -45,7 +45,7 @@ namespace VetClinicAPI_V2.Controllers
             return CreatedAtAction(nameof(GetProcedureById), new { id = result.Id }, result);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateProcedure")]
         public async Task<ActionResult<Procedure>> UpdateProcedure([FromBody] ProcedureUpdateDTO dto)
         {
             var result = await _procedureRepository.UpdateProcedureAsync(dto);
@@ -58,7 +58,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteProcedure")]
         public async Task<ActionResult<bool>> DeleteProcedure(int id)
         {
             var deleted = await _procedureRepository.DeleteProcedureAsync(id);

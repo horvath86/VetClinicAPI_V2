@@ -16,7 +16,7 @@ namespace VetClinicAPI_V2.Controllers
             _appointmentRepository = appointmentRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetAppointments")]
         public async Task<ActionResult<ICollection<AppointmentResponseDTO>>> GetAppointments([FromQuery] string? search, [FromQuery] DateOnly? dateOnly)
         {
             var result = await _appointmentRepository.GetAllAppointmentsAsync(search, dateOnly);
@@ -24,7 +24,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetAppointmentById")]
         public async Task<ActionResult<AppointmentResponseDTO>> GetAppointmentById(int id)
         {
             var result = await _appointmentRepository.GetAppointmentByIdAsync(id);
@@ -37,7 +37,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateAppointment")]
         public async Task<ActionResult<AppointmentResponseDTO>> CreateAppointment([FromBody] AppointmentCreateDTO dto)
         {
             var result = await _appointmentRepository.CreateAppointmentAsync(dto);
@@ -45,7 +45,7 @@ namespace VetClinicAPI_V2.Controllers
             return CreatedAtAction(nameof(GetAppointmentById), new { id = result.Id }, result);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateAppointment")]
         public async Task<ActionResult<AppointmentResponseDTO>> UpdateAppointment([FromBody] AppointmentUpdateDTO dto)
         {
             var result = await _appointmentRepository.UpdateAppointmentAsync(dto);
@@ -58,7 +58,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteAppointment")]
         public async Task<ActionResult<bool>> DeleteAppointment(int id)
         {
             var deleted = await _appointmentRepository.DeleteAppointmentAsync(id);

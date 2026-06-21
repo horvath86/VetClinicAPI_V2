@@ -16,7 +16,7 @@ namespace VetClinicAPI_V2.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost("register")]
+        [HttpPost("register", Name = "Register")]
         public async Task<ActionResult<UserResponseDTO>> Register([FromBody] UserRegisterDTO dto)
         {
             var existingUser = await _userRepository.GetUserByEmailAsync(dto.Email);
@@ -28,10 +28,10 @@ namespace VetClinicAPI_V2.Controllers
 
             var result = await _userRepository.CreateUserAsync(dto);
 
-            return CreatedAtRoute("GetUserByIdRoute", new { id = result.Id }, result);
+            return CreatedAtRoute("GetUserById", new { id = result.Id }, result);
         }
 
-        [HttpPost("login")]
+        [HttpPost("login", Name = "Login")]
         public async Task<ActionResult<UserResponseDTO>> Login([FromBody] UserLoginDTO dto)
         {
             var result = await _userRepository.GetUserByEmailAsync(dto.Email);

@@ -17,7 +17,7 @@ namespace VetClinicAPI_V2.Controllers
             _animalRepository = animalRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetAnimals")]
         public async Task<ActionResult<ICollection<AnimalResponseDTO>>> GetAnimals([FromQuery] string? search, [FromQuery] SpeciesEnum? species)
         {
             var result = await _animalRepository.GetAllAnimalsAsync(search, species);
@@ -25,7 +25,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetAnimalById")]
         public async Task<ActionResult<AnimalResponseDTO>> GetAnimalById(int id)
         {
             var result = await _animalRepository.GetAnimalByIdAsync(id);
@@ -38,7 +38,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateAnimal")]
         public async Task<ActionResult<AnimalResponseDTO>> CreateAnimal([FromBody] AnimalCreateDTO dto)
         {
             var result = await _animalRepository.CreateAnimalAsync(dto);
@@ -46,7 +46,7 @@ namespace VetClinicAPI_V2.Controllers
             return CreatedAtAction(nameof(GetAnimalById), new { id = result.Id }, result);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateAnimal")]
         public async Task<ActionResult<AnimalResponseDTO>> UpdateAnimal([FromBody] AnimalUpdateDTO dto)
         {
             var result = await _animalRepository.UpdateAnimalAsync(dto);
@@ -59,7 +59,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteAnimal")]
         public async Task<ActionResult<bool>> DeleteAnimal(int id)
         {
             var deleted = await _animalRepository.DeleteAnimalAsync(id);

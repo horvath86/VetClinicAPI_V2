@@ -16,7 +16,7 @@ namespace VetClinicAPI_V2.Controllers
             _ownerRepository = ownerRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetOwners")]
         public async Task<ActionResult<ICollection<OwnerResponseDTO>>> GetOwners([FromQuery] string? search)
         {
             var result = await _ownerRepository.GetAllOwnersAsync(search);
@@ -24,7 +24,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id}", Name = "GetOwnerById")]
         public async Task<ActionResult<OwnerResponseDTO>> GetOwnerById(int id)
         {
             var result = await _ownerRepository.GetOwnerByIdAsync(id);
@@ -37,7 +37,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost(Name = "CreateOwner")]
         public async Task<ActionResult<OwnerResponseDTO>> CreateOwner([FromBody] OwnerCreateDTO dto)
         {
             var result = await _ownerRepository.CreateOwnerAsync(dto);
@@ -45,7 +45,7 @@ namespace VetClinicAPI_V2.Controllers
             return CreatedAtAction(nameof(GetOwnerById), new {id = result.Id}, result);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateOwner")]
         public async Task<ActionResult<OwnerResponseDTO>> UpdateOwner([FromBody] OwnerUpdateDTO dto)
         {
             var result = await _ownerRepository.UpdateOwnerAsync(dto);
@@ -58,7 +58,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteOwner")]
         public async Task<ActionResult<bool>> DeleteOwner(int id)
         {
             var deleted = await _ownerRepository.DeleteOwnerAsync(id);

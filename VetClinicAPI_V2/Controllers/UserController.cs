@@ -17,7 +17,7 @@ namespace VetClinicAPI_V2.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpGet]
+        [HttpGet(Name = "GetUsers")]
         public async Task<ActionResult<ICollection<UserResponseDTO>>> GetUsers([FromQuery] RoleEnum? role)
         {
             var result = await _userRepository.GetAllUsersAsync(role);
@@ -25,7 +25,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}", Name = "GetUserByIdRoute")]
+        [HttpGet("{id}", Name = "GetUserById")]
         public async Task<ActionResult<UserResponseDTO?>> GetUserById(int id)
         {
             var result = await _userRepository.GetUserByIdAsync(id);
@@ -38,7 +38,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpPut]
+        [HttpPut(Name = "UpdateUser")]
         public async Task<ActionResult<UserResponseDTO?>> UpdateUser([FromBody] UserUpdateDTO dto)
         {
             var result = await _userRepository.UpdateUserAsync(dto);
@@ -51,7 +51,7 @@ namespace VetClinicAPI_V2.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}", Name = "DeleteUser")]
         public async Task<ActionResult<bool>> DeleteUser(int id)
         {
             var deleted = await _userRepository.DeleteUserAsync(id);
