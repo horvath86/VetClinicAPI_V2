@@ -1,5 +1,8 @@
-﻿namespace VetClinicAPI_V2.Enums
+﻿
+
+namespace VetClinicAPI_V2.Enums
 {
+    
     public enum SpeciesEnum
     {
         Canine,

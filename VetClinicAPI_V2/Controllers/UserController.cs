@@ -3,6 +3,7 @@ using VetClinicAPI_V2.DTO.Requests;
 using VetClinicAPI_V2.DTO.Responses;
 using VetClinicAPI_V2.Enums;
 using VetClinicAPI_V2.Interfaces;
+using VetClinicAPI_V2.Params;
 
 namespace VetClinicAPI_V2.Controllers
 {
@@ -18,9 +19,9 @@ namespace VetClinicAPI_V2.Controllers
         }
 
         [HttpGet(Name = "GetUsers")]
-        public async Task<ActionResult<ICollection<UserResponseDTO>>> GetUsers([FromQuery] RoleEnum? role)
+        public async Task<ActionResult<ICollection<UserResponseDTO>>> GetUsers([FromQuery] UserQueryParameters queryParameters)
         {
-            var result = await _userRepository.GetAllUsersAsync(role);
+            var result = await _userRepository.GetAllUsersAsync(queryParameters);
 
             return Ok(result);
         }

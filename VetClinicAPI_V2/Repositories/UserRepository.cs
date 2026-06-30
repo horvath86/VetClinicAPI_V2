@@ -5,6 +5,7 @@ using VetClinicAPI_V2.DTO.Responses;
 using VetClinicAPI_V2.Enums;
 using VetClinicAPI_V2.Interfaces;
 using VetClinicAPI_V2.Models;
+using VetClinicAPI_V2.Params;
 
 namespace VetClinicAPI_V2.Repositories
 {
@@ -69,13 +70,18 @@ namespace VetClinicAPI_V2.Repositories
         }
 
         //get all or by role
-        public async Task<ICollection<UserResponseDTO>> GetAllUsersAsync(RoleEnum? role = null)
+        public async Task<ICollection<UserResponseDTO>> GetAllUsersAsync(UserQueryParameters queryParameters) 
         {
             var query = _context.Users.AsNoTracking();
 
-            if (role.HasValue)
+            if (queryParameters.Role.HasValue)
             {
-                query = query.Where(u => u.Role == role.Value);
+                query = query.Where(u => u.Role == queryParameters.Role.Value);
+            }
+
+            if (queryParameters.includeDeleted == true)
+            {
+                query = query.IgnoreQueryFilters();
             }
 
             return await query
